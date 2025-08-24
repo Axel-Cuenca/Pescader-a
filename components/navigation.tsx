@@ -3,7 +3,8 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { LayoutDashboard, Package, ShoppingCart, Users, BarChart3, Menu, Fish } from "lucide-react"
+import { LayoutDashboard, Package, ShoppingCart, Users, BarChart3, Menu, Fish, LogOut } from "lucide-react"
+import { useAuth } from "@/components/auth/auth-provider"
 
 interface NavigationProps {
   currentPage: string
@@ -20,6 +21,12 @@ const navigationItems = [
 
 export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const { user, logout } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+    setIsOpen(false)
+  }
 
   const NavContent = () => (
     <div className="flex flex-col h-full">
@@ -32,6 +39,13 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
           <p className="text-sm text-muted-foreground">Sistema de Gestión</p>
         </div>
       </div>
+
+      {user && (
+        <div className="p-4 border-b bg-gray-50">
+          <p className="text-sm font-medium text-gray-900">{user.name}</p>
+          <p className="text-xs text-gray-500 capitalize">{user.role}</p>
+        </div>
+      )}
 
       <nav className="flex-1 p-4">
         <div className="space-y-2">
@@ -56,6 +70,17 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
           })}
         </div>
       </nav>
+
+      <div className="p-4 border-t">
+        <Button
+          variant="outline"
+          className="w-full justify-start gap-3 text-red-600 hover:text-red-700 hover:bg-red-50 bg-transparent"
+          onClick={handleLogout}
+        >
+          <LogOut className="w-4 h-4" />
+          Cerrar Sesión
+        </Button>
+      </div>
     </div>
   )
 

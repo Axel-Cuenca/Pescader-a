@@ -42,6 +42,8 @@
   --color-coral: oklch(0.7 0.15 25);
   --color-seafoam: oklch(0.8 0.1 160);
   --color-pearl: oklch(0.95 0.02 200);
+  --font-sans: "Poppins", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .dark {
@@ -85,6 +87,9 @@
 }
 
 @theme inline {
+  --font-sans: var(--font-poppins), Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
