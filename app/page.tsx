@@ -22,44 +22,9 @@ export default function HomePage() {
     console.log("[v0] HomePage: Usuario no autenticado, mostrando LoginForm")
     console.log("[v0] HomePage: RETORNANDO LoginForm ahora")
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "linear-gradient(135deg, #f0f9ff, #e0f7fa)",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 9999,
-        }}
-      >
-        <div style={{ width: "100%", maxWidth: "400px", padding: "20px" }}>
-          <div
-            style={{
-              background: "white",
-              padding: "40px",
-              borderRadius: "12px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-              border: "2px solid #0ea5e9",
-            }}
-          >
-            <h1
-              style={{
-                textAlign: "center",
-                marginBottom: "30px",
-                color: "#0f172a",
-                fontSize: "24px",
-                fontWeight: "bold",
-              }}
-            >
-              🐟 Sistema Pescadería
-            </h1>
-            <LoginForm onLogin={login} />
-          </div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-cyan-50 p-4">
+        <div className="w-full max-w-md">
+          <LoginForm onLogin={login} />
         </div>
       </div>
     )

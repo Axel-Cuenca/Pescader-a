@@ -6,7 +6,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { type AuthState, authService } from "@/lib/auth"
 
 interface AuthContextType extends AuthState {
-  login: (username: string, password: string) => boolean
+  login: (user: any) => void // Cambiar para recibir el usuario directamente
   logout: () => void
 }
 
@@ -34,19 +34,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     console.log("[v0] AuthProvider: Estado final - isAuthenticated:", !!user)
   }, [])
 
-  const login = (username: string, password: string): boolean => {
-    console.log("[v0] AuthProvider: Intentando login con usuario:", username)
-    const user = authService.login(username, password)
+  const login = (user: any): void => {
+    // Recibir el usuario directamente del LoginForm
+    console.log("[v0] AuthProvider: Recibiendo usuario autenticado:", user)
     if (user) {
-      console.log("[v0] AuthProvider: Login exitoso:", user)
+      console.log("[v0] AuthProvider: Actualizando estado con usuario:", user)
       setAuthState({
         user,
         isAuthenticated: true,
       })
-      return true
+    } else {
+      console.log("[v0] AuthProvider: Usuario inválido recibido")
     }
-    console.log("[v0] AuthProvider: Login fallido")
-    return false
   }
 
   const logout = () => {

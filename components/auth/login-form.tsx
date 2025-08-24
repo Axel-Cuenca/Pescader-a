@@ -12,7 +12,7 @@ import { Fish, Lock, User } from "lucide-react"
 import { authService } from "@/lib/auth"
 
 interface LoginFormProps {
-  onLogin: () => void
+  onLogin: (user: any) => void // Cambiar para recibir el usuario como parámetro
 }
 
 export function LoginForm({ onLogin }: LoginFormProps) {
@@ -21,26 +21,20 @@ export function LoginForm({ onLogin }: LoginFormProps) {
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
-  console.log("[v0] LoginForm: Renderizando formulario de login")
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
     setIsLoading(true)
 
-    console.log("[v0] LoginForm: Intentando login con usuario:", username)
-
     try {
       const user = authService.login(username, password)
       if (user) {
-        console.log("[v0] LoginForm: Login exitoso, llamando onLogin")
-        onLogin()
+        console.log("[v0] LoginForm: Login exitoso, pasando usuario a onLogin:", user)
+        onLogin(user) // Pasar el usuario como parámetro
       } else {
-        console.log("[v0] LoginForm: Login fallido")
         setError("Usuario o contraseña incorrectos")
       }
     } catch (err) {
-      console.log("[v0] LoginForm: Error en login:", err)
       setError("Error al iniciar sesión")
     } finally {
       setIsLoading(false)
@@ -48,7 +42,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
   }
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md mx-auto">
       <CardHeader className="text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
           <Fish className="h-8 w-8 text-blue-600" />
