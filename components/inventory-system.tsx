@@ -226,7 +226,7 @@ export function InventorySystem() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="price">Precio (€) *</Label>
+                <Label htmlFor="price">Precio (ARS) *</Label>
                 <Input
                   id="price"
                   type="number"
@@ -413,7 +413,7 @@ export function InventorySystem() {
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">Precio:</span>
                     <span className="font-semibold text-lg">
-                      {formatCurrency(product.price)}/{product.unit}
+                      {formatCurrency(product.price, "ARS")}/{product.unit}
                     </span>
                   </div>
 
